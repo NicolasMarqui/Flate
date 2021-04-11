@@ -1,0 +1,20 @@
+{
+  "name": "flate",
+  "plugins": [
+    {
+      "name": "TailwindCSS",
+      "description": "A utility-first CSS framework packed with classes like flex, pt-4, text-center and rotate-90 that can be composed to build any design, directly in your markup.",
+      "url": "https://tailwindcss.com/docs"
+    },
+    {
+      "name": "SASS/SCSS",
+      "description": "Sass is a stylesheet language that’s compiled to CSS. It allows you to use variables, nested rules, mixins, functions, and more, all with a fully CSS-compatible syntax.",
+      "url": "https://sass-lang.com/documentation"
+    },
+    {
+      "name": "Fetch",
+      "description": "Next.js has a built-in polyfill for the fetch API. You don't need to worry about using it on either server or client side.",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"
+    }
+  ]
+}
