@@ -11,7 +11,7 @@ const Section: React.FC<SectionProps> = ({
 }) => {
     return (
         <div
-            className={`${classes} relative py-20 md:py-24 border-2 border-light`}
+            className={`${classes} relative py-20 md:py-24 border-b-2 border-light`}
         >
             {children}
         </div>

@@ -1,6 +1,7 @@
 import Meta from "@components/Meta";
 import Hero from "@components/Hero";
 import Latest from "@components/Latest";
+import Experience from "@components/Experience";
 
 const Home: React.FC = () => {
     return (
@@ -12,6 +13,7 @@ const Home: React.FC = () => {
             />
             <Hero />
             <Latest />
+            <Experience />
         </>
     );
 };

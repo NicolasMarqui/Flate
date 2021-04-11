@@ -10,6 +10,8 @@ module.exports = {
                 overlay: "rgba(0, 0, 0, 0.47)",
                 lightGray: "#BABABA",
                 mediumGray: "#B2B2B2",
+                cardGray1: "#6B6B6B",
+                cardGray2: "#AAAAAA",
                 preTitle: "rgba(255, 255, 255, 0.08)",
                 primaryHover: "rgba(193, 44, 49, 1)",
             },
@@ -25,6 +27,7 @@ module.exports = {
             },
             borderColor: (theme) => ({
                 light: "rgba(255, 255, 255, 0.08)",
+                card: "#F4F4F4",
             }),
         },
         variant: {
@@ -32,6 +35,10 @@ module.exports = {
                 display: ["group-hover", "hover"],
                 borderRadius: ["group-hover", "hover"],
             },
+        },
+        flex: {
+            2: "2 2 0%",
+            1.5: "1.5 1.5 0%",
         },
         fontFamily: ["Raleway", "Charmonman", "sans-serif"],
         container: {
