@@ -14,10 +14,10 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
     return (
         <header
             className={`
-            absolute left-0 right-0 top-10 z-20 ${
+            z-20 ${
                 router.pathname !== "/"
-                    ? "relative border-bottom-2 border-light"
-                    : ""
+                    ? "relative border-b-2 border-light mt-8 pb-4"
+                    : "absolute left-0 right-0 top-8"
             }
         `}
         >

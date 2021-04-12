@@ -2,15 +2,14 @@ import Container from "@components/Container";
 import Section from "@components/Section";
 import PreTitle from "@components/Typography/PreTitle";
 import Title from "@components/Typography/Title";
-import Image from "next/image";
 
-interface ExperienceProps {}
-
-const Experience: React.FC<ExperienceProps> = ({}) => {
+const Experience: React.FC = ({}) => {
     return (
         <Section>
             <Container classes="px-4">
-                <PreTitle>30 years experience</PreTitle>
+                <div className="hidden md:block">
+                    <PreTitle>30 years experience</PreTitle>
+                </div>
                 <div className="flex flex-col md:flex-row items-centers">
                     <div className="flex-1 -mt-10 order-2 md:order-1 md:pr-10">
                         <Title classes="text-center md:text-left">
@@ -27,7 +26,7 @@ const Experience: React.FC<ExperienceProps> = ({}) => {
                             elit, sed do eiusmod tempor incididunt ut labore et.
                         </p>
                     </div>
-                    <div className="flex-1 order-1 md:order-2">
+                    <div className="flex-1 order-1 md:order-2 mt-5">
                         <img
                             src="/images/detail.png"
                             width={992}

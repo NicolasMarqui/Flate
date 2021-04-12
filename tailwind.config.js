@@ -29,16 +29,16 @@ module.exports = {
                 light: "rgba(255, 255, 255, 0.08)",
                 card: "#F4F4F4",
             }),
+            flex: {
+                2: "2 2 0%",
+                1.5: "1.5 1.5 0%",
+            },
         },
         variant: {
             extend: {
                 display: ["group-hover", "hover"],
                 borderRadius: ["group-hover", "hover"],
             },
-        },
-        flex: {
-            2: "2 2 0%",
-            1.5: "1.5 1.5 0%",
         },
         fontFamily: ["Raleway", "Charmonman", "sans-serif"],
         container: {

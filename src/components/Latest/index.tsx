@@ -26,11 +26,11 @@ const Latest: React.FC<LatestProps> = ({}) => {
                     </Slider>
                 </div>
 
-                <div className="bg-primary mt-14 md:w-1/5 mx-10 md:mx-auto rounded-2xl py-4 px-10 flex flex-row items-center justify-center cursor-pointer hover:bg-primaryHover ">
-                    <Link href="/listings">
+                <Link href="/listings">
+                    <div className="bg-primary mt-14 md:w-1/5 mx-10 md:mx-auto rounded-2xl py-4 px-10 flex flex-row items-center justify-center cursor-pointer hover:bg-primaryHover ">
                         <a className="text-xl text-white font-bold">See all</a>
-                    </Link>
-                </div>
+                    </div>
+                </Link>
             </Container>
         </Section>
     );
