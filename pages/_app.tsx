@@ -38,12 +38,6 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                     height={300}
                     width={300}
                 />
-
-                {/* <div className="mt-4">
-                    <h2 className="text-3xl text-primary font-bold">
-                        Loading...
-                    </h2>
-                </div> */}
             </div>
             <Layout>
                 <Component {...pageProps} />

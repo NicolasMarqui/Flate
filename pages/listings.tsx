@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Meta from "@components/Meta";
 import FilterContainer from "@components/FilterContainer";
 import PropertyCard from "@components/PropertyCard";
@@ -10,21 +10,17 @@ import { FaTimes } from "react-icons/fa";
 import prisma from "@utils/prisma";
 import { GetServerSideProps } from "next";
 import { Estates } from "@prisma/client";
-import { useRouter } from "next/router";
 
 interface ListingProps {
     listings: Estates[] | [];
 }
 
 const Listings: React.FC<ListingProps> = ({ listings }) => {
-    const router = useRouter();
-
     const { width } = useWindowSize();
     const MapWithNoSSR = dynamic(() => import("../src/components/Map"), {
         ssr: false,
     });
     const isRow = width > 755;
-
     const [showMap, setShowMap] = useState(null);
 
     return (
@@ -34,7 +30,7 @@ const Listings: React.FC<ListingProps> = ({ listings }) => {
                 description="Encontre os melhores tutores para te ajudar nessa jornada"
                 keywords="home, tutor, javascript, nivelamento, aprender, algoritimos, comprar"
             />
-            <FilterContainer />
+            <FilterContainer amount={listings.length} location="    " />
             <div className="listing__wrapper relative">
                 <div className="listing__results">
                     <div
@@ -99,16 +95,9 @@ const Listings: React.FC<ListingProps> = ({ listings }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-    let cityQuery = {};
-    let typeQuery = {};
-
-    if (query.location)
-        cityQuery = { city_name: (query.location as string) || "" };
-    if (query.type) typeQuery = { id: Number(query.location) || -1 };
-
     const listings = await prisma.estates.findMany({
         where: {
-            city: cityQuery,
+            city: { city_name: (query.location as string) || undefined },
             type: {},
             number_of_bathroom: {},
             number_of_bedroom: {},
@@ -123,6 +112,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
             employee: { select: { first_name: true, last_name: true } },
             status: { select: { status_name: true } },
         },
+        orderBy: { id: "asc" },
     });
 
     return {

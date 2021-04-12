@@ -3,10 +3,11 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet-defaulticon-compatibility";
 import { Estates } from ".prisma/client";
-import PropertyCard from "@components/PropertyCard";
 import L from "leaflet";
 import ReactDOMServer from "react-dom/server";
 import CustomIcon from "@components/CustomIcon";
+import { GiPositionMarker } from "react-icons/gi";
+import Link from "next/link";
 
 interface MapProps {
     markers: Estates[];
@@ -55,7 +56,49 @@ const Map: React.FC<MapProps> = ({ markers }) => {
                         }}
                     >
                         <Popup>
-                            <PropertyCard estate={mark} />
+                            <img
+                                src={
+                                    `${mark.pictures.split(",")[0]}.jpg` ||
+                                    "/images/banner.jpg"
+                                }
+                                height={196}
+                                className={`object-cover w-full m-196 rounded-xl`}
+                            />
+                            <div className="flex items-center justify-between w-full py-2">
+                                <h5 className="text-2xl font-bold text-primary">
+                                    € {mark.price}
+                                </h5>
+                            </div>
+                            <div className="flex flex-col justify-start">
+                                <h3 className="text-2xl font-semibold text-black222">
+                                    {mark.estate_name}
+                                </h3>
+                                <div className="-mt-1 flex flex-row items-center">
+                                    <span>
+                                        <GiPositionMarker
+                                            size={13}
+                                            color="#222"
+                                            className="mr-2"
+                                        />
+                                    </span>
+                                    <h4 className="text-cardGray2 text-xl font-semibold">
+                                        {/* @ts-ignore */}
+                                        {mark.city.city_name},{" "}
+                                        {/* @ts-ignore */}
+                                        {mark.city.country.country_name}
+                                    </h4>
+                                </div>
+                                <div className="mt-2 py-2 px-4 rounded-xl flex items-center justify-center bg-primaryBlue">
+                                    <Link
+                                        href="/listing/[id]"
+                                        as={`/listing/${mark.id}`}
+                                    >
+                                        <a className="text-sm font-bold text-center text-white whiteYoo">
+                                            See more
+                                        </a>
+                                    </Link>
+                                </div>
+                            </div>
                         </Popup>
                     </Marker>
                 );

@@ -14,6 +14,8 @@ module.exports = {
                 cardGray2: "#AAAAAA",
                 preTitle: "rgba(255, 255, 255, 0.08)",
                 primaryHover: "rgba(193, 44, 49, 1)",
+                primaryBlue: "#168AAD",
+                primaryLight: "#FFAEB1",
             },
             backgroundImage: (theme) => ({
                 banner: "url('/images/banner.jpg')",
