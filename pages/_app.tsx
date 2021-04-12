@@ -29,7 +29,7 @@ Router.events.on("routeChangeError", () => {
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     return (
         <>
-            <div className="loader h-screen w-screen flex-col items-center justify-center z-50 hidden overflow-hidden opacity-25">
+            <div className="loader h-screen w-screen flex-col items-center justify-center z-50 hidden overflow-hidden bg-transparent">
                 <Lottie
                     options={{
                         loop: true,

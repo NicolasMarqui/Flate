@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Employee {
+  id        Int     @default(autoincrement()) @id
+  first_name     String
+  last_name      String
+  estates     Estates[]
+}
+
+model Country {
+  id        Int     @default(autoincrement()) @id
+  country_name    String
+  cities    City[]
+}
+
+model City {
+  id        Int     @default(autoincrement()) @id
+  city_name    String
+  country    Country   @relation(fields: [countryId], references: [id])
+  countryId  Int
+  estates     Estates[]
+}
+
+model Type {
+  id        Int     @default(autoincrement()) @id
+  type_name    String
+  estates     Estates[]
+}
+
+model Status {
+  id        Int     @default(autoincrement()) @id
+  status_name    String
+  estates     Estates[]
+}
+
+model Estates{
+  id    String     @id @default(uuid())
+  estate_name      String @db.VarChar(200)
+  city    City   @relation(fields: [cityId], references: [id])
+  cityId  Int
+  type    Type   @relation(fields: [typeId], references: [id])
+  typeId  Int
+  status    Status   @relation(fields: [statusId], references: [id])
+  statusId  Int
+  employee    Employee   @relation(fields: [employeeId], references: [id])
+  employeeId  Int
+  total_area    Int
+  number_of_garage  Int
+  number_of_floors  Int
+  number_of_bedroom Int
+  number_of_bathroom Int
+  estate_description  String @db.Text()
+  price String
+  price_monthly Boolean
+  coordinates String
+  pictures String @db.Text()
+}
+

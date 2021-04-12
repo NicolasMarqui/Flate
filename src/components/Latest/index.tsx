@@ -6,10 +6,13 @@ import Slider from "react-slick";
 import { homeLatests } from "@utils/sliderSettings";
 import PropertyCard from "@components/PropertyCard";
 import Link from "next/link";
+import { Estates } from "@prisma/client";
 
-interface LatestProps {}
+interface LatestProps {
+    latests: Estates[];
+}
 
-const Latest: React.FC<LatestProps> = ({}) => {
+const Latest: React.FC<LatestProps> = ({ latests }) => {
     return (
         <Section>
             <Container>
@@ -20,8 +23,8 @@ const Latest: React.FC<LatestProps> = ({}) => {
 
                 <div className="mt-10">
                     <Slider {...homeLatests}>
-                        {new Array(10).fill("-").map((a, idx) => (
-                            <PropertyCard key={idx} />
+                        {latests.map((lat) => (
+                            <PropertyCard key={lat.id} estate={lat} />
                         ))}
                     </Slider>
                 </div>

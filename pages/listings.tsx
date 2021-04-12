@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Meta from "@components/Meta";
 import FilterContainer from "@components/FilterContainer";
 import PropertyCard from "@components/PropertyCard";
@@ -7,8 +7,18 @@ import useWindowSize from "@hooks/useWindowSize";
 import { BsMap } from "react-icons/bs";
 import Title from "@components/Typography/Title";
 import { FaTimes } from "react-icons/fa";
+import prisma from "@utils/prisma";
+import { GetServerSideProps } from "next";
+import { Estates } from "@prisma/client";
+import { useRouter } from "next/router";
 
-const Listings: React.FC = ({}) => {
+interface ListingProps {
+    listings: Estates[] | [];
+}
+
+const Listings: React.FC<ListingProps> = ({ listings }) => {
+    const router = useRouter();
+
     const { width } = useWindowSize();
     const MapWithNoSSR = dynamic(() => import("../src/components/Map"), {
         ssr: false,
@@ -32,9 +42,19 @@ const Listings: React.FC = ({}) => {
                             isRow ? "" : " md:px-16 flex flex-wrap"
                         }`}
                     >
-                        {new Array(10).fill("-").map((a, idx) => (
-                            <PropertyCard key={idx} isRow={isRow} />
-                        ))}
+                        {listings && listings.length > 0 ? (
+                            listings.map((list: Estates) => (
+                                <PropertyCard
+                                    key={list.id}
+                                    isRow={isRow}
+                                    estate={list}
+                                />
+                            ))
+                        ) : (
+                            <p className="text-white text-2xl text-center">
+                                Empty
+                            </p>
+                        )}
                     </div>
                 </div>
                 <div
@@ -43,7 +63,7 @@ const Listings: React.FC = ({}) => {
                     }`}
                 >
                     <div className="help">
-                        <MapWithNoSSR />
+                        <MapWithNoSSR markers={listings} />
                     </div>
                 </div>
                 {width < 992 && (
@@ -70,11 +90,46 @@ const Listings: React.FC = ({}) => {
                                 <FaTimes size={30} color="#fff" />
                             </div>
                         </div>
-                        <MapWithNoSSR />
+                        <MapWithNoSSR markers={listings} />
                     </div>
                 </div>
             )}
         </div>
     );
 };
+
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+    let cityQuery = {};
+    let typeQuery = {};
+
+    if (query.location)
+        cityQuery = { city_name: (query.location as string) || "" };
+    if (query.type) typeQuery = { id: Number(query.location) || -1 };
+
+    const listings = await prisma.estates.findMany({
+        where: {
+            city: cityQuery,
+            type: {},
+            number_of_bathroom: {},
+            number_of_bedroom: {},
+            number_of_floors: {},
+            number_of_garage: {},
+        },
+        include: {
+            city: {
+                select: { city_name: true, country: true },
+            },
+            type: { select: { type_name: true } },
+            employee: { select: { first_name: true, last_name: true } },
+            status: { select: { status_name: true } },
+        },
+    });
+
+    return {
+        props: {
+            listings,
+        },
+    };
+};
+
 export default Listings;
