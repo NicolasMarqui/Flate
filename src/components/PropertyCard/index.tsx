@@ -15,7 +15,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
     estate,
 }) => {
     return (
-        <Link href="/listing/3">
+        <Link href="/listing/[id]" as={`/listing/${estate.id}`}>
             <a>
                 <div
                     className={`bg-white flex-1 mx-3 relative my-3 flex rounded-xl ${

@@ -34,6 +34,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                     options={{
                         loop: true,
                         animationData: LOADING__ANIMATION,
+                        autoplay: true,
                     }}
                     height={300}
                     width={300}

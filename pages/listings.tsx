@@ -10,6 +10,7 @@ import { FaTimes } from "react-icons/fa";
 import prisma from "@utils/prisma";
 import { GetServerSideProps } from "next";
 import { Estates } from "@prisma/client";
+import EmptyAnimation from "@components/EmptyAnimation";
 
 interface ListingProps {
     listings: Estates[] | [];
@@ -27,8 +28,8 @@ const Listings: React.FC<ListingProps> = ({ listings }) => {
         <div className="listings relative">
             <Meta
                 title="Listings"
-                description="Encontre os melhores tutores para te ajudar nessa jornada"
-                keywords="home, tutor, javascript, nivelamento, aprender, algoritimos, comprar"
+                description="Rent or Buy your new home on Flate, the leading accommodation marketplace for nacionals and internationals."
+                keywords="buy, rent, house, locations, worlds"
             />
             <FilterContainer amount={listings.length} location="    " />
             <div className="listing__wrapper relative">
@@ -47,9 +48,7 @@ const Listings: React.FC<ListingProps> = ({ listings }) => {
                                 />
                             ))
                         ) : (
-                            <p className="text-white text-2xl text-center">
-                                Empty
-                            </p>
+                            <EmptyAnimation />
                         )}
                     </div>
                 </div>

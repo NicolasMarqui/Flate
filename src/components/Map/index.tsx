@@ -88,12 +88,12 @@ const Map: React.FC<MapProps> = ({ markers }) => {
                                         {mark.city.country.country_name}
                                     </h4>
                                 </div>
-                                <div className="mt-2 py-2 px-4 rounded-xl flex items-center justify-center bg-primaryBlue">
+                                <div className="mt-2 rounded-xl flex items-center justify-center bg-primaryBlue">
                                     <Link
                                         href="/listing/[id]"
                                         as={`/listing/${mark.id}`}
                                     >
-                                        <a className="text-sm font-bold text-center text-white whiteYoo">
+                                        <a className="py-2 px-4 text-sm font-bold text-center text-white whiteYoo hover:bg-blue-800 rounded-xl">
                                             See more
                                         </a>
                                     </Link>

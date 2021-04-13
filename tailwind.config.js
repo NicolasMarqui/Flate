@@ -35,12 +35,14 @@ module.exports = {
                 2: "2 2 0%",
                 1.5: "1.5 1.5 0%",
             },
+            scale: ["group-hover"],
         },
         variant: {
             extend: {
                 display: ["group-hover", "hover"],
                 borderRadius: ["group-hover", "hover"],
             },
+            scale: ["responsive", "hover", "focus", "active", "group-hover"],
         },
         fontFamily: ["Raleway", "Charmonman", "sans-serif"],
         container: {

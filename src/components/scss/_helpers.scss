@@ -35,6 +35,7 @@
 .leaflet-container {
     width: 100%;
     height: 100vh;
+    z-index: 40;
 }
 
 .help {
@@ -56,4 +57,57 @@
 
 .whiteYoo {
     color: #fff !important;
+    display: block !important;
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.details__det {
+    @media (min-width: 744px) {
+        min-width: 547px !important;
+    }
+
+    @media (min-width: 1128px) {
+        width: 58vw !important;
+    }
+
+    @media (min-width: 1440px) {
+        width: 840px !important;
+    }
+}
+
+.details__resp {
+    display: none !important;
+    position: absolute !important;
+    background-color: transparent;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    @media (min-width: 1128px) {
+        display: block !important;
+        left: auto !important;
+        width: calc(100% - 68vw) !important;
+    }
+
+    @media (min-width: 1440px) {
+        width: calc(100% - 940px) !important;
+    }
+}
+
+.resp__static {
+    position: sticky;
+    top: 20px;
+}
+
+.details__resp-mobile {
+    position: fixed;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 50;
+
+    @media (min-width: 1128px) {
+        display: none !important;
+    }
 }

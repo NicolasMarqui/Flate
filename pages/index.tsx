@@ -16,8 +16,8 @@ const Home: React.FC<HomeProps> = ({ latests }) => {
         <>
             <Meta
                 title="Home"
-                description="Encontre os melhores tutores para te ajudar nessa jornada"
-                keywords="home, tutor, javascript, nivelamento, aprender, algoritimos, comprar"
+                description="Rent or Buy your new home on Flate, the leading accommodation marketplace for nacionals and internationals."
+                keywords="buy, rent, house, locations, worlds"
             />
             <Hero />
             <Latest latests={latests} />
