@@ -5,13 +5,14 @@ import Experience from "@components/Experience";
 import Safety from "@components/Safety";
 import { GetStaticProps } from "next";
 import prisma from "@utils/prisma";
-import { Estates } from "@prisma/client";
+import { Estates, Country } from "@prisma/client";
 
 interface HomeProps {
-    latests: Estates[];
+    estates: Estates[];
+    countries: Country[];
 }
 
-const Home: React.FC<HomeProps> = ({ latests }) => {
+const Home: React.FC<HomeProps> = ({ estates, countries }) => {
     return (
         <>
             <Meta
@@ -19,8 +20,8 @@ const Home: React.FC<HomeProps> = ({ latests }) => {
                 description="Rent or Buy your new home on Flate, the leading accommodation marketplace for nacionals and internationals."
                 keywords="buy, rent, house, locations, worlds"
             />
-            <Hero />
-            <Latest latests={latests} />
+            <Hero estates={estates} countries={countries} />
+            <Latest latests={estates.slice(0, 9)} />
             <Experience />
             <Safety />
         </>
@@ -28,8 +29,7 @@ const Home: React.FC<HomeProps> = ({ latests }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-    const latests = await prisma.estates.findMany({
-        take: 8,
+    const estates = await prisma.estates.findMany({
         include: {
             city: {
                 select: { city_name: true, country: true },
@@ -38,11 +38,19 @@ export const getStaticProps: GetStaticProps = async () => {
             employee: { select: { first_name: true, last_name: true } },
             status: { select: { status_name: true } },
         },
+        distinct: ["cityId"],
+
+        orderBy: { id: "asc" },
+    });
+
+    const countries = await prisma.country.findMany({
+        distinct: ["country_name"],
     });
 
     return {
         props: {
-            latests,
+            estates,
+            countries,
         },
     };
 };

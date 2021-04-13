@@ -1,8 +1,14 @@
+import { Country, Estates } from ".prisma/client";
 import Container from "@components/Container";
 import FiltersHero from "@components/FiltersHero";
 import Title from "@components/Typography/Title";
 
-const Hero: React.FC = ({}) => {
+interface HeroProps {
+    estates: Estates[];
+    countries: Country[];
+}
+
+const Hero: React.FC<HeroProps> = ({ estates, countries }) => {
     return (
         <div
             className="relative bg-banner bg-cover bg-no-repeat bg-center flex items-center justify-center"
@@ -14,9 +20,10 @@ const Hero: React.FC = ({}) => {
                     Find your <span className="text-primary">dream</span> home
                 </Title>
 
-                <FiltersHero />
+                <FiltersHero estates={estates} countries={countries} />
             </Container>
         </div>
     );
 };
+
 export default Hero;

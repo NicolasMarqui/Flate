@@ -36,6 +36,29 @@ module.exports = {
                 1.5: "1.5 1.5 0%",
             },
             scale: ["group-hover"],
+            keyframes: {
+                "fade-in-down": {
+                    "0%": {
+                        opacity: "0",
+                        transform: "translateY(-10px)",
+                    },
+                    "100%": {
+                        opacity: "1",
+                        transform: "translateY(0)",
+                    },
+                },
+                sideLeft: {
+                    from: {
+                        transform: "translateX(0px)",
+                    },
+                    to: {
+                        transform: "translateX(300px)",
+                    },
+                },
+            },
+            animation: {
+                "fade-in-down": "fade-in-down 0.3s ease-out",
+            },
         },
         variant: {
             extend: {

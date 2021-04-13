@@ -22,10 +22,10 @@ const Dropdown: React.FC<DropdownProps> = ({
 
     return (
         <div
-            className={`
+            className={`${classes} 
             absolute flex-col right-0 w-96 p-4 mt-2 rounded-md shadow-lg z-20 bg-white drop__wrapper wrapper__white animate-fade-in-down
             ${isOpen ? "flex" : "hidden"}
-            ${classes}
+            
         `}
             ref={dropRef}
         >

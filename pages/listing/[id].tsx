@@ -7,15 +7,16 @@ import ListingHeader from "@components/Listing/ListingHeader";
 import ListingImages from "@components/Listing/ListingImages";
 import ListingDetails from "@components/Listing/ListingDetails";
 import Meta from "@components/Meta";
-import ListingMap from "@components/Listing/ListingMap";
 import dynamic from "next/dynamic";
 import ListingContactMobile from "@components/Listing/ListingContactMobile";
+import ListingSimilar from "@components/Listing/ListingSimilar";
 
 interface ListingProps {
     estate: Estates | any;
+    similarEstates: Estates[] | undefined;
 }
 
-const Listing: React.FC<ListingProps> = ({ estate }) => {
+const Listing: React.FC<ListingProps> = ({ estate, similarEstates }) => {
     const MapWithNoSSR = dynamic(
         () => import("../../src/components/Listing/ListingMap"),
         {
@@ -42,12 +43,19 @@ const Listing: React.FC<ListingProps> = ({ estate }) => {
 
                 <ListingImages pictures={estate.pictures} />
                 <ListingDetails estate={estate} />
-                <div className="mt-10">
+                <div className="mt-10 mb-5">
                     <p className="text-base text-mediumGray text-center md:text-left">
                         Map
                     </p>
 
                     <MapWithNoSSR coordinates={estate.coordinates} />
+
+                    {similarEstates && similarEstates.length > 0 && (
+                        <ListingSimilar
+                            country={estate.city.country.country_name}
+                            similar={similarEstates}
+                        />
+                    )}
                 </div>
             </Container>
             <ListingContactMobile employee={estate.employee} />
@@ -68,9 +76,25 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
         },
     });
 
+    const similarEstates = await prisma.estates.findMany({
+        where: {
+            city: { country: { id: estate.city.country.id || undefined } },
+            NOT: { id: estate.id },
+        },
+        include: {
+            city: {
+                select: { city_name: true, country: true },
+            },
+            type: { select: { type_name: true } },
+            employee: { select: { first_name: true, last_name: true } },
+            status: { select: { status_name: true } },
+        },
+    });
+
     return {
         props: {
             estate,
+            similarEstates,
         },
     };
 };

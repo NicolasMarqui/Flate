@@ -11,12 +11,14 @@ import prisma from "@utils/prisma";
 import { GetServerSideProps } from "next";
 import { Estates } from "@prisma/client";
 import EmptyAnimation from "@components/EmptyAnimation";
+import { useRouter } from "next/router";
 
 interface ListingProps {
     listings: Estates[] | [];
 }
 
 const Listings: React.FC<ListingProps> = ({ listings }) => {
+    const router = useRouter();
     const { width } = useWindowSize();
     const MapWithNoSSR = dynamic(() => import("../src/components/Map"), {
         ssr: false,
@@ -31,7 +33,7 @@ const Listings: React.FC<ListingProps> = ({ listings }) => {
                 description="Rent or Buy your new home on Flate, the leading accommodation marketplace for nacionals and internationals."
                 keywords="buy, rent, house, locations, worlds"
             />
-            <FilterContainer amount={listings.length} location="    " />
+            <FilterContainer amount={listings.length} location="" />
             <div className="listing__wrapper relative">
                 <div className="listing__results">
                     <div
@@ -97,11 +99,12 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     const listings = await prisma.estates.findMany({
         where: {
             city: { city_name: (query.location as string) || undefined },
-            type: {},
-            number_of_bathroom: {},
-            number_of_bedroom: {},
-            number_of_floors: {},
-            number_of_garage: {},
+            type: { type_name: (query.type as string) || undefined },
+            status: { status_name: (query.status as string) || undefined },
+            number_of_bathroom: Number(query.bathroom) || undefined,
+            number_of_bedroom: Number(query.bedroom) || undefined,
+            number_of_floors: Number(query.floors) || undefined,
+            number_of_garage: Number(query.garage) || undefined,
         },
         include: {
             city: {
