@@ -1,26 +1,61 @@
+import { useState } from "react";
+import { useRouter } from "next/router";
 import { MdExpandMore } from "react-icons/md";
+import Dropdown from "@components/Dropdown";
+import FDropdownLocation from "@components/Filters/FDropdownLocation";
+import { Country, Estates } from ".prisma/client";
+import { Reoverlay } from "reoverlay";
+import ExtraFilters from "@components/Modals/ExtraFilters";
 
 interface FilterContainerProps {
-    location: string | null;
     amount: number;
+    estates: Estates[];
+    countries: Country[];
 }
 
 const FilterContainer: React.FC<FilterContainerProps> = ({
-    location,
     amount,
+    estates,
+    countries,
 }) => {
+    const router = useRouter();
+    const [openFLocation, setOpenFLocation] = useState(false);
+
     return (
         <div className="w-full px-10 flex items-center flex-col md:flex-row">
-            <div className="flex-1 md:border-r-2 border-light py-6 md:pr-6">
+            <div
+                className="flex-1 md:border-r-2 border-light py-6 md:pr-6 relative"
+                onClick={() => setOpenFLocation(!openFLocation)}
+            >
                 <p className="text-xl text-mediumGray text-center md:text-left">
                     The location you’re looking for
                 </p>
                 <div className="flex items-center justify-center md:justify-start cursor-pointer">
-                    <h3 className="font-bold text-4xl text-white">
-                        {location || "Everywhere"}
+                    <h3 className="font-bold text-4xl text-white hover:underline">
+                        {(router.query.location as string) || "Everywhere"}
                     </h3>
                     <MdExpandMore color="#BABABA" className="ml-2" />
                 </div>
+
+                <Dropdown
+                    isOpen={openFLocation}
+                    handleChange={() => setOpenFLocation(!openFLocation)}
+                    classes="w-auto left-0 bg-white shadow-lg"
+                >
+                    <FDropdownLocation
+                        locations={estates}
+                        countries={countries}
+                        handleClick={(value) =>
+                            router.push(
+                                {
+                                    pathname: "/listings",
+                                    query: { ...router.query, location: value },
+                                },
+                                undefined
+                            )
+                        }
+                    />
+                </Dropdown>
             </div>
             <div className="flex-1 md:border-r-2 border-light py-6 md:px-6">
                 <p className="text-xl text-mediumGray text-center md:text-left">
@@ -32,54 +67,38 @@ const FilterContainer: React.FC<FilterContainerProps> = ({
                     </h3>
                 </div>
             </div>
-            <div className="flex-1 md:border-r-2 border-light py-6 md:px-6">
-                <p className="text-xl text-mediumGray text-center md:text-left">
-                    Sort by
-                </p>
-                <div className="flex items-center justify-center md:justify-start">
-                    <h3 className="font-bold text-4xl text-white">Price</h3>
-                    <MdExpandMore color="#BABABA" className="ml-2" />
-                </div>
-            </div>
-            <div className="flex-1 py-6 md:px-6">
+
+            <div
+                className="flex-1 py-6 md:px-6 relative"
+                onClick={() => Reoverlay.showModal(ExtraFilters)}
+            >
                 <p className="text-xl text-mediumGray text-center md:text-left">
                     Filter
                 </p>
                 <div className="flex flex-row items-center mt-1">
-                    <div className="py-2 px-4  flex items-center justify-center bg-primaryBlue mr-2 cursor-pointer">
-                        <p className="text-xl font-bold text-white">Filters</p>
+                    <div className="flex items-center justify-center md:justify-start">
+                        <h3 className="font-bold text-4xl text-white hover:underline cursor-pointer">
+                            All Filters
+                        </h3>
+                        <MdExpandMore color="#BABABA" className="ml-2" />
                     </div>
-                    {/* {isRow ? (
-                        <div
-                            className="py-2 px-4  flex items-center justify-center bg-primaryBlue mx-2 cursor-pointer"
-                            data-id="showCol"
-                            onClick={() => handleRowChange(!isRow)}
-                            data-tip="Display as columns"
-                        >
-                            <MdViewModule size={27} color="#fff" />
-                            <Tooltip
-                                id="showCol"
-                                effect="solid"
-                                place="bottom"
-                            />
-                        </div>
-                    ) : (
-                        <div
-                            className="py-2 px-4  flex items-center justify-center bg-primaryBlue mx-2 cursor-pointer"
-                            onClick={() => handleRowChange(!isRow)}
-                            data-id="showRow"
-                            data-tip="Display as rows"
-                        >
-                            <MdViewAgenda size={27} color="#fff" />
-                            <Tooltip
-                                id="showRow"
-                                effect="solid"
-                                place="bottom"
-                            />
-                        </div>
-                    )} */}
                 </div>
             </div>
+            {Object.keys(router.query).length > 0 && (
+                <div
+                    className="flex-1 md:border-l-2 border-light py-6 md:px-6"
+                    onClick={() => router.push("/listings")}
+                >
+                    <p className="text-xl text-mediumGray text-center md:text-left">
+                        Clear
+                    </p>
+                    <div className="flex items-center justify-center md:justify-start">
+                        <h3 className="font-bold text-4xl  hover:underline cursor-pointer text-red-400">
+                            Clear Filters
+                        </h3>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

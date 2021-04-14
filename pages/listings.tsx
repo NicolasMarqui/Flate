@@ -9,15 +9,21 @@ import Title from "@components/Typography/Title";
 import { FaTimes } from "react-icons/fa";
 import prisma from "@utils/prisma";
 import { GetServerSideProps } from "next";
-import { Estates } from "@prisma/client";
+import { Country, Estates } from "@prisma/client";
 import EmptyAnimation from "@components/EmptyAnimation";
 import { useRouter } from "next/router";
 
 interface ListingProps {
     listings: Estates[] | [];
+    countries: Country[];
+    allListings: Estates[];
 }
 
-const Listings: React.FC<ListingProps> = ({ listings }) => {
+const Listings: React.FC<ListingProps> = ({
+    listings,
+    countries,
+    allListings,
+}) => {
     const router = useRouter();
     const { width } = useWindowSize();
     const MapWithNoSSR = dynamic(() => import("../src/components/Map"), {
@@ -33,7 +39,11 @@ const Listings: React.FC<ListingProps> = ({ listings }) => {
                 description="Rent or Buy your new home on Flate, the leading accommodation marketplace for nacionals and internationals."
                 keywords="buy, rent, house, locations, worlds"
             />
-            <FilterContainer amount={listings.length} location="" />
+            <FilterContainer
+                amount={listings.length}
+                estates={allListings}
+                countries={countries}
+            />
             <div className="listing__wrapper relative">
                 <div className="listing__results">
                     <div
@@ -78,7 +88,10 @@ const Listings: React.FC<ListingProps> = ({ listings }) => {
                     <div className="absolute text-white top-0 right-0 left-0 bottom-20">
                         <div className="flex items-center justify-between">
                             <Title classes="text-center py-8 px-2 text-5xl md:text-7xl ml-3">
-                                Map <span className="text-primary">Italy</span>
+                                Map{" "}
+                                <span className="text-primary">
+                                    {router.query.location || "Everywhere"}
+                                </span>
                             </Title>
                             <div
                                 className="bg-bg rounded-full mr-4 p-4"
@@ -117,9 +130,27 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         orderBy: { id: "asc" },
     });
 
+    const countries = await prisma.country.findMany({
+        distinct: ["country_name"],
+    });
+
+    const allListings = await prisma.estates.findMany({
+        include: {
+            city: {
+                select: { city_name: true, country: true },
+            },
+            type: { select: { type_name: true } },
+            employee: { select: { first_name: true, last_name: true } },
+            status: { select: { status_name: true } },
+        },
+        orderBy: { id: "desc" },
+    });
+
     return {
         props: {
             listings,
+            countries,
+            allListings,
         },
     };
 };

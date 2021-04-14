@@ -8,6 +8,7 @@ import "@styles/global.scss";
 import Layout from "@components/Layout";
 import Router from "next/router";
 import Lottie from "react-lottie";
+import { ModalContainer } from "reoverlay";
 import LOADING__ANIMATION from "../public/animations/loading.json";
 
 Router.events.on("routeChangeStart", () => {
@@ -29,6 +30,7 @@ Router.events.on("routeChangeError", () => {
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     return (
         <>
+            <ModalContainer />
             <div className="loader h-screen w-screen flex-col items-center justify-center z-50 hidden overflow-hidden bg-transparent">
                 <Lottie
                     options={{

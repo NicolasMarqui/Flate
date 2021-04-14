@@ -1,8 +1,8 @@
-import { GiHomeGarage, GiBed } from "react-icons/gi";
 import Tooltip from "react-tooltip";
-import { BsHouse } from "react-icons/bs";
 import Link from "next/link";
 import { Estates } from "@prisma/client";
+import { BsHouse } from "react-icons/bs";
+import { GiHomeGarage, GiBed } from "react-icons/gi";
 import { GiPositionMarker } from "react-icons/gi";
 import { BiBath } from "react-icons/bi";
 interface PropertyCardProps {

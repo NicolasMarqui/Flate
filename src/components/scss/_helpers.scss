@@ -117,3 +117,11 @@
     left: 0;
     width: auto;
 }
+
+.modalFilter {
+    width: 70vw;
+
+    @media (min-width: 992px) {
+        width: 40vw;
+    }
+}

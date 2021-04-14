@@ -28,7 +28,7 @@ const FDropdownLocation: React.FC<FDropdownLocationProps> = ({
                         .map((city: any, idx: number) => (
                             <div
                                 key={idx}
-                                className="rounded-sm py-2 hover:bg-gray-100"
+                                className="rounded-sm py-2 hover:bg-gray-100 cursor-pointer"
                                 onClick={() => handleClick(city.city.city_name)}
                             >
                                 <h3 className="text-2xl text-black222 font-bold">

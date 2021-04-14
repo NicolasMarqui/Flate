@@ -23,7 +23,7 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
         >
             <Container classes="px-7">
                 <div className="flex items-center justify-between">
-                    <div className="flex-1">
+                    <div className="flex-none">
                         <Link href="/">
                             <a>
                                 <h1 className="font-charm text-white text-4xl font-bold">
