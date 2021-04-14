@@ -1,5 +1,6 @@
 import { useClickOutside } from "@hooks/useClickOutside";
 import { useRef } from "react";
+import { motion } from "framer-motion";
 
 interface DropdownProps {
     isOpen: boolean;
@@ -21,7 +22,9 @@ const Dropdown: React.FC<DropdownProps> = ({
     });
 
     return (
-        <div
+        <motion.div
+            initial={{ y: -500 }}
+            animate={{ y: 0 }}
             className={`${classes} 
             absolute flex-col right-0 w-96 p-4 mt-2 rounded-md shadow-lg z-20 bg-white drop__wrapper wrapper__white animate-fade-in-down
             ${isOpen ? "flex" : "hidden"}
@@ -30,7 +33,7 @@ const Dropdown: React.FC<DropdownProps> = ({
             ref={dropRef}
         >
             {children}
-        </div>
+        </motion.div>
     );
 };
 

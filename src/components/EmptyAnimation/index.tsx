@@ -13,7 +13,7 @@ const EmptyAnimation: React.FC = ({}) => {
     };
 
     return (
-        <div className="my-5 flex flex-col items-center justify-start">
+        <div className="my-5 flex flex-col items-center justify-start w-full">
             <Lottie
                 options={defaultOptions}
                 height={150}
