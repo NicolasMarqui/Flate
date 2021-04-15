@@ -41,7 +41,7 @@ const Listing: React.FC<ListingProps> = ({ estate, similarEstates }) => {
                     city={estate.city.city_name}
                 />
 
-                <ListingImages pictures={estate.pictures} />
+                <ListingImages pictures={estate.pictures} id={estate.id} />
                 <ListingDetails estate={estate} />
                 <div className="mt-10 mb-5">
                     <p className="text-base text-mediumGray text-center md:text-left">

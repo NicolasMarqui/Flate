@@ -12,6 +12,8 @@ import { GetServerSideProps } from "next";
 import { Country, Estates } from "@prisma/client";
 import EmptyAnimation from "@components/EmptyAnimation";
 import { useRouter } from "next/router";
+import ReactPaginate from "react-paginate";
+import { getTotalPages } from "@utils/getTotalPages";
 
 interface ListingProps {
     listings: Estates[] | [];
@@ -30,7 +32,12 @@ const Listings: React.FC<ListingProps> = ({
         ssr: false,
     });
     const isRow = width > 755;
+    const [page, setPage] = useState(1);
     const [showMap, setShowMap] = useState(null);
+
+    const handlePagination = (e: number) => {
+        setPage(e);
+    };
 
     return (
         <div className="listings relative">
@@ -52,14 +59,38 @@ const Listings: React.FC<ListingProps> = ({
                         }`}
                     >
                         {listings && listings.length > 0 ? (
-                            listings.map((list: Estates, idx: number) => (
-                                <PropertyCard
-                                    key={list.id}
-                                    isRow={isRow}
-                                    estate={list}
-                                    idx={idx}
+                            <>
+                                {listings
+                                    .slice((page - 1) * 5, page * 5)
+                                    .map((list: Estates, idx: number) => (
+                                        <PropertyCard
+                                            key={list.id}
+                                            isRow={isRow}
+                                            estate={list}
+                                            idx={idx}
+                                        />
+                                    ))}
+
+                                <ReactPaginate
+                                    previousLabel={"Previous"}
+                                    nextLabel={"Next"}
+                                    containerClassName={"pagination"}
+                                    activeClassName={"active"}
+                                    pageCount={getTotalPages(
+                                        listings.length,
+                                        5
+                                    )}
+                                    marginPagesDisplayed={2}
+                                    pageRangeDisplayed={5}
+                                    onPageChange={(e) =>
+                                        handlePagination(
+                                            e.selected === 0
+                                                ? 1
+                                                : e.selected + 1
+                                        )
+                                    }
                                 />
-                            ))
+                            </>
                         ) : (
                             <EmptyAnimation />
                         )}

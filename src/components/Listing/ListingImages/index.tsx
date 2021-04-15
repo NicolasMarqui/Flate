@@ -5,9 +5,10 @@ import { motion } from "framer-motion";
 
 interface ListingImagesProps {
     pictures: string;
+    id: string;
 }
 
-const ListingImages: React.FC<ListingImagesProps> = ({ pictures }) => {
+const ListingImages: React.FC<ListingImagesProps> = ({ pictures, id }) => {
     const [isOpenGallery, setIsOpenGallery] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
 
@@ -20,7 +21,7 @@ const ListingImages: React.FC<ListingImagesProps> = ({ pictures }) => {
 
     return (
         <>
-            <div className="mt-6 flex flex-wrap md:grid grid-cols-4 grid-rows-2 gap-3">
+            <motion.div className="mt-6 flex flex-wrap md:grid grid-cols-4 grid-rows-2 gap-3">
                 <div
                     className="row-span-2 col-span-2 cursor-pointer group"
                     onClick={() => handleClick(0)}
@@ -28,6 +29,9 @@ const ListingImages: React.FC<ListingImagesProps> = ({ pictures }) => {
                     <motion.img
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.8 }}
+                        layoutId={`mainImage#${id}`}
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
                         src={`${picArr[0]}`}
                         alt="Image 1"
                         className="h-full w-full object-cover group-hover:scale-105"
@@ -88,7 +92,7 @@ const ListingImages: React.FC<ListingImagesProps> = ({ pictures }) => {
                         className="h-full w-full object-cover"
                     />
                 </div>
-            </div>
+            </motion.div>
             {isOpenGallery && (
                 <Lightbox
                     mainSrc={picArr[selectedImage]}
