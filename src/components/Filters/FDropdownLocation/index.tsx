@@ -1,4 +1,5 @@
 import { Country, Estates } from ".prisma/client";
+import { useRouter } from "next/router";
 
 interface FDropdownLocationProps {
     locations: Estates[] | any;
@@ -11,11 +12,27 @@ const FDropdownLocation: React.FC<FDropdownLocationProps> = ({
     handleClick,
     countries,
 }) => {
+    const router = useRouter();
+
     return (
         <>
             {countries.map((country, idx1) => (
                 <div key={idx1} className="mb-2">
-                    <p className="text-base text-gray-500">
+                    <p
+                        className="text-base text-gray-500 cursor-pointer"
+                        onClick={() =>
+                            router.push(
+                                {
+                                    pathname: "/listings",
+                                    query: {
+                                        ...router.query,
+                                        country: country.country_name,
+                                    },
+                                },
+                                undefined
+                            )
+                        }
+                    >
                         {country.country_name}
                     </p>
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Lightbox from "react-image-lightbox";
-import "react-image-lightbox/style.css"; // This only needs to be imported once in your app
+import "react-image-lightbox/style.css";
+import { motion } from "framer-motion";
 
 interface ListingImagesProps {
     pictures: string;
@@ -24,7 +25,9 @@ const ListingImages: React.FC<ListingImagesProps> = ({ pictures }) => {
                     className="row-span-2 col-span-2 cursor-pointer group"
                     onClick={() => handleClick(0)}
                 >
-                    <img
+                    <motion.img
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.8 }}
                         src={`${picArr[0]}`}
                         alt="Image 1"
                         className="h-full w-full object-cover group-hover:scale-105"
@@ -34,7 +37,9 @@ const ListingImages: React.FC<ListingImagesProps> = ({ pictures }) => {
                     className="row-start-1 col-start-3 cursor-pointer"
                     onClick={() => handleClick(1)}
                 >
-                    <img
+                    <motion.img
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.8 }}
                         src={`${picArr[1]}`}
                         alt="Image 2"
                         className="h-full w-full object-cover"
@@ -44,7 +49,9 @@ const ListingImages: React.FC<ListingImagesProps> = ({ pictures }) => {
                     className="row-start-1 col-start-4 cursor-pointer"
                     onClick={() => handleClick(2)}
                 >
-                    <img
+                    <motion.img
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.8 }}
                         src={`${picArr[2]}`}
                         alt="Image 3"
                         className="h-full w-full object-cover"
@@ -54,7 +61,9 @@ const ListingImages: React.FC<ListingImagesProps> = ({ pictures }) => {
                     className="row-start-2 col-start-3 cursor-pointer"
                     onClick={() => handleClick(3)}
                 >
-                    <img
+                    <motion.img
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.8 }}
                         src={`${picArr[3]}`}
                         alt="Image 4"
                         className="h-full w-full object-cover"
@@ -71,7 +80,9 @@ const ListingImages: React.FC<ListingImagesProps> = ({ pictures }) => {
                             </p>
                         </div>
                     )}
-                    <img
+                    <motion.img
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.8 }}
                         src={`${picArr[4]}`}
                         alt="Image 5"
                         className="h-full w-full object-cover"

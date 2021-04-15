@@ -39,14 +39,14 @@ const FullMenu: React.FC<FullMenuProps> = ({ handleClose }) => {
             <motion.div
                 className="bg-primary z-40 fixed top-0 bottom-0 fullMenu"
                 variants={menuVariants}
-                initial={{ right: 0 }}
+                initial={{ right: -500 }}
                 animate={currOpen ? "openNoDelay" : "closeDelay"}
             ></motion.div>
 
             <motion.div
                 className="fixed z-50 top-0 bottom-0 bg-bg "
                 variants={menuVariants}
-                initial={{ right: 0 }}
+                initial={{ right: -500 }}
                 animate={currOpen ? "open" : "close"}
                 onAnimationComplete={!currOpen ? handleClose : null}
             >

@@ -14,6 +14,8 @@ interface MapProps {
 }
 
 const Map: React.FC<MapProps> = ({ markers }) => {
+    const colors = ["#FF5A5F", "#168AAD", "#52B69A", "#F8961E", "#2D3142"];
+    const random = Math.floor(Math.random() * colors.length);
     const handleMarker = (e: any) => {
         // map.setView([e.latlng.lat, e.latlng.lng], 17);
     };
@@ -35,7 +37,10 @@ const Map: React.FC<MapProps> = ({ markers }) => {
                 const icon = L.divIcon({
                     className: "custom-icon",
                     html: ReactDOMServer.renderToString(
-                        <CustomIcon price={mark.price} />
+                        <CustomIcon
+                            price={mark.price}
+                            color={colors[idx] || "#FF5A5F"}
+                        />
                     ),
                 });
 

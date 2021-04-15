@@ -60,7 +60,7 @@ const FiltersHero: React.FC<FiltersHeroProps> = ({ estates, countries }) => {
                 <Dropdown
                     isOpen={locationOpen}
                     handleChange={() => setLocationOpen(!locationOpen)}
-                    classes="filterDrop bg-white shadow-lg"
+                    classes="filterDrop bg-white shadow-lg max-h-56 overflow-y-auto"
                 >
                     <FDropdownLocation
                         locations={estates}

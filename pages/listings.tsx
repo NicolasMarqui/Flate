@@ -52,11 +52,12 @@ const Listings: React.FC<ListingProps> = ({
                         }`}
                     >
                         {listings && listings.length > 0 ? (
-                            listings.map((list: Estates) => (
+                            listings.map((list: Estates, idx: number) => (
                                 <PropertyCard
                                     key={list.id}
                                     isRow={isRow}
                                     estate={list}
+                                    idx={idx}
                                 />
                             ))
                         ) : (
@@ -111,7 +112,12 @@ const Listings: React.FC<ListingProps> = ({
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     const listings = await prisma.estates.findMany({
         where: {
-            city: { city_name: (query.location as string) || undefined },
+            city: {
+                city_name: (query.location as string) || undefined,
+                country: {
+                    country_name: (query.country as string) || undefined,
+                },
+            },
             type: { type_name: (query.type as string) || undefined },
             status: { status_name: (query.status as string) || undefined },
             number_of_bathroom: Number(query.bathroom) || undefined,

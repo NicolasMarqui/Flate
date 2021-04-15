@@ -24,8 +24,8 @@ const ListingSimilar: React.FC<ListingSimilarProps> = ({
 
             <div className="mt-10">
                 <Slider {...homeLatests}>
-                    {similar.map((lat) => (
-                        <PropertyCard key={lat.id} estate={lat} />
+                    {similar.map((lat, idx) => (
+                        <PropertyCard key={lat.id} estate={lat} idx={idx} />
                     ))}
                 </Slider>
             </div>

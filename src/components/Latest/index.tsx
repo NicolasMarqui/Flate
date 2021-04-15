@@ -23,8 +23,8 @@ const Latest: React.FC<LatestProps> = ({ latests }) => {
 
                 <div className="mt-10">
                     <Slider {...homeLatests}>
-                        {latests.map((lat) => (
-                            <PropertyCard key={lat.id} estate={lat} />
+                        {latests.map((lat, idx) => (
+                            <PropertyCard key={lat.id} estate={lat} idx={idx} />
                         ))}
                     </Slider>
                 </div>

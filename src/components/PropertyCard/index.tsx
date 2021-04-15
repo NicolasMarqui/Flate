@@ -5,19 +5,24 @@ import { BsHouse } from "react-icons/bs";
 import { GiHomeGarage, GiBed } from "react-icons/gi";
 import { GiPositionMarker } from "react-icons/gi";
 import { BiBath } from "react-icons/bi";
+import { motion } from "framer-motion";
 interface PropertyCardProps {
     isRow?: boolean;
     estate: Estates | any;
+    idx: number;
 }
 
 const PropertyCard: React.FC<PropertyCardProps> = ({
     isRow = false,
     estate,
+    idx,
 }) => {
     return (
         <Link href="/listing/[id]" as={`/listing/${estate.id}`}>
             <a>
-                <div
+                <motion.div
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.97 }}
                     className={`bg-white flex-1 mx-3 relative my-3 flex rounded-xl ${
                         isRow ? "flex-row" : "flex-col"
                     }`}
@@ -28,8 +33,9 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
                             {estate.type.type_name}
                         </p>
                     </div>
-                    <div className="flex-1">
-                        <img
+                    <div className="flex-1 overflow-hidden">
+                        <motion.img
+                            whileHover={{ scale: 1.2 }}
                             src={
                                 `${estate.pictures.split(",")[0]}.jpg` ||
                                 "/images/banner.jpg"
@@ -74,7 +80,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
                         <div className="flex-1 flex items-center justify-evenly justify-self-end px-2 border-t-2 border-card">
                             <div
                                 className="flex-1 p-2 flex items-center"
-                                data-for="areaAmount"
+                                data-for={`areaAmount#${idx}`}
                                 data-tip="Area available"
                             >
                                 <BsHouse size={25} color="#FF5A5F" />
@@ -82,14 +88,14 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
                                     {estate.total_area} m²
                                 </p>
                                 <Tooltip
-                                    id="areaAmount"
+                                    id={`areaAmount#${idx}`}
                                     place="top"
                                     effect="solid"
                                 />
                             </div>
                             <div
                                 className="flex-none p-2 flex items-center"
-                                data-for="garageAmount"
+                                data-for={`garageAmount#${idx}`}
                                 data-tip="Garage available space"
                             >
                                 <GiHomeGarage size={25} color="#FF5A5F" />
@@ -97,14 +103,14 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
                                     {estate.number_of_garage}
                                 </p>
                                 <Tooltip
-                                    id="garageAmount"
+                                    id={`garageAmount#${idx}`}
                                     place="top"
                                     effect="solid"
                                 />
                             </div>
                             <div
                                 className="flex-none p-2 flex items-center"
-                                data-for="roomsAmount"
+                                data-for={`roomsAmount#${idx}`}
                                 data-tip="Rooms available"
                             >
                                 <GiBed size={25} color="#FF5A5F" />
@@ -112,14 +118,14 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
                                     {estate.number_of_bedroom}
                                 </p>
                                 <Tooltip
-                                    id="roomsAmount"
+                                    id={`roomsAmount#${idx}`}
                                     place="top"
                                     effect="solid"
                                 />
                             </div>
                             <div
                                 className="flex-none p-2 flex items-center"
-                                data-for="roomsAmount"
+                                data-for={`bathAval#${idx}`}
                                 data-tip="Bathrooms available"
                             >
                                 <BiBath size={25} color="#FF5A5F" />
@@ -127,14 +133,14 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
                                     {estate.number_of_bathroom}
                                 </p>
                                 <Tooltip
-                                    id="roomsAmount"
+                                    id={`bathAval#${idx}`}
                                     place="top"
                                     effect="solid"
                                 />
                             </div>
                         </div>
                     </div>
-                </div>
+                </motion.div>
             </a>
         </Link>
     );

@@ -1,18 +1,18 @@
 export const menuVariants = {
     open: {
         left: 0,
+        right: 0,
         transition: { delay: 0.3 },
     },
     close: {
-        left: "auto",
-        right: 0,
+        right: -1000,
     },
     openNoDelay: {
         left: 0,
     },
     closeDelay: {
         left: "auto",
-        right: 0,
+        right: -800,
         transition: {
             delay: 0.3,
         },
@@ -48,7 +48,7 @@ export const menuVariants = {
         transition: { delay: 0.9 },
     },
     closePanels: {
-        x: 900,
-        opacity: 0,
+        // x: 900,
+        // opacity: 0,
     },
 };

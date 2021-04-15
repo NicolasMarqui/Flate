@@ -8,7 +8,7 @@ const ListingContactMobile: React.FC<ListingContactMobileProps> = ({
     employee,
 }) => {
     return (
-        <div className="details__resp-mobile bg-white flex items-center shadow-sm">
+        <div className="details__resp-mobile bg-white flex items-center shadow-sm z-30">
             <img
                 src="https://res.cloudinary.com/drbszfkyw/image/upload/v1617807889/nivelo/ofzzndfwkr2ufcxyeiz5.jpg"
                 alt={employee.first_name}

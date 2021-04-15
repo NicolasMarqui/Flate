@@ -18,7 +18,7 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
                 className={`
             z-20 ${
                 router.pathname !== "/"
-                    ? "relative border-b-2 border-light mt-8 pb-4"
+                    ? "relative border-b-2 border-light"
                     : "absolute left-0 right-0 top-8"
             }
         `}
@@ -37,16 +37,16 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
                         <div className="flex-none hidden md:block">
                             <nav>
                                 <ul className="flex justify-items-end items-center">
-                                    <li className="mx-4">
+                                    <li className="mx-4 relative">
                                         <Link href="/">
-                                            <a className="text-white text-base">
+                                            <a className="text-white text-base custom__hover--nav block py-6">
                                                 Home
                                             </a>
                                         </Link>
                                     </li>
-                                    <li className="mx-4">
+                                    <li className="mx-4 relative">
                                         <Link href="/listings">
-                                            <a className="text-white text-base">
+                                            <a className="text-white text-base custom__hover--nav block py-6">
                                                 Listings
                                             </a>
                                         </Link>
@@ -61,7 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
                                 </ul>
                             </nav>
                         </div>
-                        <div className="flex-none md:hidden">
+                        <div className="flex-none md:hidden py-5">
                             <Hamburger
                                 toggled={isOpen}
                                 toggle={handleToggle}
