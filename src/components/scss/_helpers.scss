@@ -14,14 +14,25 @@
     }
 }
 
+.listings {
+    overflow-x: hidden;
+
+    @media (min-width: 992px) {
+        overflow-x: visible;
+    }
+}
+
 .listings__map {
-    // display: none !important;
-    display: block !important;
+    display: none !important;
     position: absolute !important;
     background-color: #fff;
     top: 0;
     right: 0;
     bottom: 0;
+
+    @media (min-width: 992px) {
+        display: block !important;
+    }
 
     @media (min-width: 1128px) {
         left: auto !important;
@@ -49,10 +60,12 @@
 
 .m-300 {
     max-height: 300px;
+    height: 300px;
 }
 
 .m-196 {
     max-height: 196px;
+    height: 196px;
 }
 
 .whiteYoo {
@@ -105,7 +118,6 @@
     right: 0;
     left: 0;
     bottom: 0;
-    z-index: 30;
 
     @media (min-width: 1128px) {
         display: none !important;
@@ -163,3 +175,26 @@
 .z-100 {
     z-index: 100 !important;
 }
+
+.cursor {
+    @media (min-width: 992px) {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 32px;
+        height: 32px;
+        border-radius: 16px;
+        background-color: white;
+        mix-blend-mode: difference;
+        z-index: 999;
+        pointer-events: none;
+    }
+}
+
+// .hero__height {
+//     // min-height: 90vh;
+
+//     // @media (min-width: 992px) {
+//     //     width: 90vh;
+//     // }
+// }

@@ -89,6 +89,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
             employee: { select: { first_name: true, last_name: true } },
             status: { select: { status_name: true } },
         },
+        distinct: ["id"],
     });
 
     return {

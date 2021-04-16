@@ -14,6 +14,7 @@ import EmptyAnimation from "@components/EmptyAnimation";
 import { useRouter } from "next/router";
 import ReactPaginate from "react-paginate";
 import { getTotalPages } from "@utils/getTotalPages";
+import { motion } from "framer-motion";
 
 interface ListingProps {
     listings: Estates[] | [];
@@ -31,16 +32,20 @@ const Listings: React.FC<ListingProps> = ({
     const MapWithNoSSR = dynamic(() => import("../src/components/Map"), {
         ssr: false,
     });
-    const isRow = width > 755;
+    const isRow = width > 1126;
     const [page, setPage] = useState(1);
-    const [showMap, setShowMap] = useState(null);
+    const [showMap, setShowMap] = useState(width > 755);
 
     const handlePagination = (e: number) => {
         setPage(e);
     };
 
     return (
-        <div className="listings relative">
+        <motion.div
+            className="listings relative"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+        >
             <Meta
                 title="Listings"
                 description="Rent or Buy your new home on Flate, the leading accommodation marketplace for nacionals and internationals."
@@ -105,38 +110,38 @@ const Listings: React.FC<ListingProps> = ({
                         <MapWithNoSSR markers={listings} />
                     </div>
                 </div>
-                {width < 992 && (
-                    <div
-                        className="fixed bottom-8 right-20 left-20 py-3 px-10 bg-primary rounded-2xl flex items-center justify-center z-20"
-                        onClick={() => setShowMap(true)}
-                    >
-                        <BsMap size={22} color="#fff" className="mr-2" />
-                        <p className="text-white font-bold">Show Map</p>
-                    </div>
-                )}
-            </div>
-            {showMap && (
-                <div className="fixed inset-0 bg-black222 z-30">
-                    <div className="absolute text-white top-0 right-0 left-0 bottom-20">
-                        <div className="flex items-center justify-between">
-                            <Title classes="text-center py-8 px-2 text-5xl md:text-7xl ml-3">
-                                Map{" "}
-                                <span className="text-primary">
-                                    {router.query.location || "Everywhere"}
-                                </span>
-                            </Title>
-                            <div
-                                className="bg-bg rounded-full mr-4 p-4"
-                                onClick={() => setShowMap(false)}
-                            >
-                                <FaTimes size={30} color="#fff" />
-                            </div>
-                        </div>
-                        <MapWithNoSSR markers={listings} />
-                    </div>
+                <div
+                    className="fixed bottom-8 right-20 left-20 py-3 px-6 sm:px-10 bg-primary rounded-2xl flex md:hidden items-center justify-center z-10"
+                    onClick={() => setShowMap(true)}
+                >
+                    <BsMap size={22} color="#fff" className="mr-2" />
+                    <p className="text-white font-bold">Show Map</p>
                 </div>
-            )}
-        </div>
+            </div>
+            <div
+                className={`fixed inset-0 overflow-hidden bg-black222 z-30 ${
+                    showMap ? "block" : "hidden"
+                }`}
+            >
+                <div className="absolute text-white top-0 right-0 left-0 bottom-20">
+                    <div className="flex items-center justify-between">
+                        <Title classes="text-center py-8 px-2 text-5xl md:text-7xl ml-3">
+                            Map{" "}
+                            <span className="text-primary">
+                                {router.query.location || "Everywhere"}
+                            </span>
+                        </Title>
+                        <div
+                            className="bg-bg rounded-full mr-4 p-4"
+                            onClick={() => setShowMap(false)}
+                        >
+                            <FaTimes size={30} color="#fff" />
+                        </div>
+                    </div>
+                    <MapWithNoSSR markers={listings} />
+                </div>
+            </div>
+        </motion.div>
     );
 };
 

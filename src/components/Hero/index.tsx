@@ -10,12 +10,9 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ estates, countries }) => {
     return (
-        <div
-            className="relative bg-banner bg-cover bg-no-repeat bg-center flex items-center justify-center"
-            style={{ height: "90vh" }}
-        >
+        <div className="relative bg-banner bg-cover bg-no-repeat bg-center flex items-center justify-center hero__height">
             <div className="absolute inset-0 bg-overlay"></div>
-            <Container classes="px-4">
+            <Container classes="px-4 py-52">
                 <Title classes="text-center md:text-left text-5xl md:text-7xl md:w-2/5">
                     Find your <span className="text-primary">dream</span> home
                 </Title>

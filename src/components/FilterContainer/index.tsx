@@ -29,12 +29,14 @@ const FilterContainer: React.FC<FilterContainerProps> = ({
                 className="flex-1 md:border-r-2 border-light py-6 md:pr-6 relative"
                 onClick={() => setOpenFLocation(!openFLocation)}
             >
-                <p className="text-xl text-mediumGray text-center md:text-left">
+                <p className="text-xl md:text-base lg:text-xl text-mediumGray text-center md:text-left">
                     The location you’re looking for
                 </p>
                 <div className="flex items-center justify-center md:justify-start cursor-pointer">
-                    <h3 className="font-bold text-4xl text-white hover:underline">
-                        {(router.query.location as string) || "Everywhere"}
+                    <h3 className="font-bold text-4xl md:text-2xl lg:text-4xl text-white hover:underline">
+                        {(router.query.location as string) ||
+                            (router.query.country as string) ||
+                            "Everywhere"}
                     </h3>
                     <MdExpandMore color="#BABABA" className="ml-2" />
                 </div>
@@ -60,14 +62,14 @@ const FilterContainer: React.FC<FilterContainerProps> = ({
                 </Dropdown>
             </div>
             <div
-                className="md:border-r-2 border-light py-6 md:px-6 relative"
+                className="flex-0.5 md:border-r-2 border-light py-6 md:px-6 relative"
                 onClick={() => setOpenFType(!openFType)}
             >
-                <p className="text-xl text-mediumGray text-center md:text-left">
+                <p className="text-xl md:text-base lg:text-xl text-mediumGray text-center md:text-left">
                     Type
                 </p>
                 <div className="flex items-center justify-center md:justify-start cursor-pointer">
-                    <h3 className="font-bold text-4xl text-white hover:underline">
+                    <h3 className="font-bold text-4xl md:text-2xl lg:text-4xl text-white hover:underline">
                         {(router.query.type as string) || "All"}
                     </h3>
                     <MdExpandMore color="#BABABA" className="ml-2" />
@@ -92,11 +94,11 @@ const FilterContainer: React.FC<FilterContainerProps> = ({
                 </Dropdown>
             </div>
             <div className="flex-1 md:border-r-2 border-light py-6 md:px-6">
-                <p className="text-xl text-mediumGray text-center md:text-left">
+                <p className="text-xl md:text-base lg:text-xl text-mediumGray text-center md:text-left">
                     We found
                 </p>
                 <div className="flex items-center justify-center md:justify-start">
-                    <h3 className="font-bold text-4xl text-white">
+                    <h3 className="font-bold text-4xl md:text-2xl lg:text-4xl text-white">
                         {amount} propertie(s)
                     </h3>
                 </div>
@@ -106,12 +108,12 @@ const FilterContainer: React.FC<FilterContainerProps> = ({
                 className="flex-1 py-6 md:px-6 relative"
                 onClick={() => Reoverlay.showModal(ExtraFilters)}
             >
-                <p className="text-xl text-mediumGray text-center md:text-left">
+                <p className="text-xl md:text-base lg:text-xl text-mediumGray text-center md:text-left">
                     Filter
                 </p>
                 <div className="flex flex-row items-center mt-1">
                     <div className="flex items-center justify-center md:justify-start">
-                        <h3 className="font-bold text-4xl text-white hover:underline cursor-pointer">
+                        <h3 className="font-bold text-4xl md:text-2xl lg:text-4xl text-white hover:underline cursor-pointer">
                             All Filters
                         </h3>
                         <MdExpandMore color="#BABABA" className="ml-2" />
@@ -123,11 +125,11 @@ const FilterContainer: React.FC<FilterContainerProps> = ({
                     className="flex-1 md:border-l-2 border-light py-6 md:px-6"
                     onClick={() => router.push("/listings")}
                 >
-                    <p className="text-xl text-mediumGray text-center md:text-left">
+                    <p className="text-xl md:text-base lg:text-xl text-mediumGray text-center md:text-left">
                         Clear
                     </p>
                     <div className="flex items-center justify-center md:justify-start">
-                        <h3 className="font-bold text-4xl  hover:underline cursor-pointer text-red-400">
+                        <h3 className="font-bold text-4xl md:text-2xl lg:text-4xl  hover:underline cursor-pointer text-red-400">
                             Clear Filters
                         </h3>
                     </div>

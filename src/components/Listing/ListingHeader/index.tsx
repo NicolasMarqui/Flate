@@ -8,6 +8,9 @@ import {
 } from "react-icons/md";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useLocalStorage } from "@hooks/useLocalStorage";
+import { motion } from "framer-motion";
+import { useState } from "react";
 
 interface ListingHeaderProps {
     name: string;
@@ -16,6 +19,19 @@ interface ListingHeaderProps {
 
 const ListingHeader: React.FC<ListingHeaderProps> = ({ name, city }) => {
     const router = useRouter();
+    const [favorites, setFavorites] = useLocalStorage("favorites", []);
+    const [isAdding, setIsAdding] = useState(false);
+
+    const handleFavorites = () => {
+        setIsAdding(true);
+
+        if (favorites.includes(name)) {
+            const removeFav = favorites.filter((fav) => fav !== name);
+            setFavorites(removeFav);
+        } else {
+            setFavorites([...favorites, name]);
+        }
+    };
 
     return (
         <>
@@ -27,8 +43,10 @@ const ListingHeader: React.FC<ListingHeaderProps> = ({ name, city }) => {
                 <p className="text-sm font-bold text-white">Go back</p>
             </div>
             <div className="flex flex-col md:flex-row items-center w-full md:justify-between">
-                <div className="flex-1">
-                    <h2 className="font-bold text-4xl text-white">{name}</h2>
+                <div className="flex-1 flex flex-col items-center justify-center md:items-start">
+                    <h2 className="font-bold text-4xl text-white text-center md:text-left">
+                        {name}
+                    </h2>
                     <div className="mt-1 flex items-center">
                         <MdHome size={30} color="#fff" />
                         <MdChevronRight
@@ -37,7 +55,9 @@ const ListingHeader: React.FC<ListingHeaderProps> = ({ name, city }) => {
                             className="mx-2"
                         />
                         <Link href="/listings">
-                            <a className="text-white text-base">Listings</a>
+                            <a className="text-white text-base hover:underline">
+                                Listings
+                            </a>
                         </Link>
                         <MdChevronRight
                             size={20}
@@ -51,9 +71,17 @@ const ListingHeader: React.FC<ListingHeaderProps> = ({ name, city }) => {
                     <div className="mr-2 bg-white p-3 rounded-full cursor-pointer transform hover:scale-105">
                         <MdShare size={25} color="#222" />
                     </div>
-                    <div className="mr-2 bg-white p-3 rounded-full cursor-pointer transform hover:scale-105">
-                        <MdFavorite size={25} color="#222" />
-                    </div>
+                    <motion.div
+                        className="mr-2 bg-white p-3 rounded-full cursor-pointer"
+                        whileHover={{ scale: 1.15 }}
+                        onClick={handleFavorites}
+                    >
+                        {favorites.includes(name) ? (
+                            <MdFavorite size={25} color="red" />
+                        ) : (
+                            <MdFavorite size={25} color="#222" />
+                        )}
+                    </motion.div>
                 </div>
             </div>
         </>

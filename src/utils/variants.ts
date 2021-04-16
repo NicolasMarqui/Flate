@@ -51,4 +51,13 @@ export const menuVariants = {
         // x: 900,
         // opacity: 0,
     },
+    newFav: {
+        rotate: 360,
+        scale: [1, 1.4, 1.6, 1.4, 1],
+        transition: { duration: 0.9 },
+    },
+    regularFav: {
+        rotate: 0,
+        scale: 1,
+    },
 };

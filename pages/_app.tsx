@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     return (
         <>
             <ModalContainer />
-            <div className="loader h-screen w-screen flex-col items-center justify-center z-100 hidden overflow-hidden bg-transparent">
+            <div className="loader flex-col items-center justify-center z-100 hidden overflow-hidden bg-bg fixed inset-0">
                 <Lottie
                     options={{
                         loop: true,

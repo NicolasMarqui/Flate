@@ -11,6 +11,7 @@ body {
         sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji";
     background-color: #293241;
+    // cursor: none;
 }
 
 #nprogress .bar {
@@ -28,6 +29,8 @@ body {
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    width: 100%;
+    margin: 20px auto 0 auto;
 
     li {
         margin: 0 5px;

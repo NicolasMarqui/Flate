@@ -7,21 +7,21 @@ const Experience: React.FC = ({}) => {
     return (
         <Section>
             <Container classes="px-4">
-                <div className="hidden md:block">
+                <div className="hidden lg:block">
                     <PreTitle>30 years experience</PreTitle>
                 </div>
-                <div className="flex flex-col md:flex-row items-centers">
+                <div className="flex flex-col lg:flex-row items-centers">
                     <div className="flex-1 -mt-10 order-2 md:order-1 md:pr-10">
-                        <Title classes="text-center md:text-left">
+                        <Title classes="text-center lg:text-left">
                             30 years experience in the market
                         </Title>
 
-                        <p className="mt-10 text-white md:text-2xl text-center md:text-left">
+                        <p className="mt-10 text-white md:text-2xl text-center lg:text-left">
                             Lorem ipsum dolor sit amet, consectetur adipiscing
                             elit, sed do eiusmod tempor incididunt ut labore et.
                         </p>
 
-                        <p className="mt-5 text-white md:text-2xl text-center md:text-left">
+                        <p className="mt-5 text-white md:text-2xl text-center lg:text-left">
                             Lorem ipsum dolor sit amet, consectetur adipiscing
                             elit, sed do eiusmod tempor incididunt ut labore et.
                         </p>
