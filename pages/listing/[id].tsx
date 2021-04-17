@@ -58,7 +58,10 @@ const Listing: React.FC<ListingProps> = ({ estate, similarEstates }) => {
                     )}
                 </div>
             </Container>
-            <ListingContactMobile employee={estate.employee} />
+            <ListingContactMobile
+                employee={estate.employee}
+                propName={estate.estate_name}
+            />
         </div>
     );
 };

@@ -68,9 +68,9 @@ const ListingHeader: React.FC<ListingHeaderProps> = ({ name, city }) => {
                     </div>
                 </div>
                 <div className="flex-none flex items-center mt-3 md:mt-0">
-                    <div className="mr-2 bg-white p-3 rounded-full cursor-pointer transform hover:scale-105">
+                    {/* <div className="mr-2 bg-white p-3 rounded-full cursor-pointer transform hover:scale-105">
                         <MdShare size={25} color="#222" />
-                    </div>
+                    </div> */}
                     <motion.div
                         className="mr-2 bg-white p-3 rounded-full cursor-pointer"
                         whileHover={{ scale: 1.15 }}

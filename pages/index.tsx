@@ -6,6 +6,7 @@ import Safety from "@components/Safety";
 import { GetStaticProps } from "next";
 import prisma from "@utils/prisma";
 import { Estates, Country } from "@prisma/client";
+import CTA from "@components/CTA";
 
 interface HomeProps {
     estates: Estates[];
@@ -24,6 +25,7 @@ const Home: React.FC<HomeProps> = ({ estates, countries }) => {
             <Latest latests={estates.slice(0, 9)} />
             <Experience />
             <Safety />
+            <CTA />
         </>
     );
 };

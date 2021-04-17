@@ -1,8 +1,17 @@
+import Contact from "@components/Modals/Contact";
+import { Reoverlay } from "reoverlay";
+
 interface ListingContactProps {
     employee: any;
+    propName: string;
 }
 
-const ListingContact: React.FC<ListingContactProps> = ({ employee }) => {
+const ListingContact: React.FC<ListingContactProps> = ({
+    employee,
+    propName,
+}) => {
+    const openModal = () => Reoverlay.showModal(Contact, { propName });
+
     return (
         <div className="details__resp">
             <div className="resp__static">
@@ -26,7 +35,10 @@ const ListingContact: React.FC<ListingContactProps> = ({ employee }) => {
                             mollitia, et deleniti.
                         </p>
 
-                        <div className="mt-5 bg-primary rounded-2xl flex items-center justify-center cursor-pointer hover:bg-primaryHover">
+                        <div
+                            className="mt-5 bg-primary rounded-2xl flex items-center justify-center cursor-pointer hover:bg-primaryHover"
+                            onClick={openModal}
+                        >
                             <p className="text-white font-bold p-2">
                                 CONTACT ME
                             </p>

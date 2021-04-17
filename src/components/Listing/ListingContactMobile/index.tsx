@@ -1,12 +1,18 @@
 import { MdChatBubble } from "react-icons/md";
+import { Reoverlay } from "reoverlay";
+import Contact from "@components/Modals/Contact";
 
 interface ListingContactMobileProps {
     employee: any;
+    propName: string;
 }
 
 const ListingContactMobile: React.FC<ListingContactMobileProps> = ({
     employee,
+    propName,
 }) => {
+    const openModal = () => Reoverlay.showModal(Contact, { propName });
+
     return (
         <div className="details__resp-mobile bg-white flex items-center shadow-sm z-50">
             <img
@@ -19,7 +25,10 @@ const ListingContactMobile: React.FC<ListingContactMobileProps> = ({
                 <h4 className="text-black222 text-xl font-bold text-center">
                     {employee.first_name} {employee.last_name}
                 </h4>
-                <div className="bg-primary rounded-full flex items-center justify-center cursor-pointer hover:bg-primaryHover p-3 mr-2">
+                <div
+                    className="bg-primary rounded-full flex items-center justify-center cursor-pointer hover:bg-primaryHover p-3 mr-2"
+                    onClick={openModal}
+                >
                     <MdChatBubble size={25} color="#fff" />
                 </div>
             </div>
