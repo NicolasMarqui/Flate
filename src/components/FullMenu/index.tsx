@@ -134,6 +134,7 @@ const FullMenu: React.FC<FullMenuProps> = ({ handleClose }) => {
                         <motion.h3
                             className="text-white underline text-2xl z-20 pb-2 cursor-pointer"
                             whileHover={{ scale: 1.3 }}
+                            onClick={() => router.push("/listings")}
                         >
                             Explore
                         </motion.h3>
