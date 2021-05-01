@@ -40,7 +40,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
                 <motion.div
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.97 }}
-                    className={`bg-white flex-1 mx-3 relative my-3 flex rounded-xl ${
+                    className={`bg-white flex-1 relative m-6 flex rounded-xl ${
                         isRow ? "flex-row" : "flex-col"
                     }`}
                 >
@@ -86,7 +86,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
                                 </p>
                             </div>
                         </div>
-                        <div className="flex-none  py-2 px-4 flex flex-col justify-start">
+                        <div className="flex-none  py-4 px-4 flex flex-col justify-start">
                             <h3 className="text-2xl xs:text-xl lg:text-2xl font-semibold text-black222">
                                 {estate.estate_name.length > 19 &&
                                 width < 1400 &&
